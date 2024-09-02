@@ -83,35 +83,75 @@ using namespace std;
 // }
 //__________________________________
 
-int main() {  //Diamanten
-    int width;
+// int main() {  //Diamanten
+//     int width;
+//
+//     cout << "Enter the width of the diamond: ";
+//     cin >> width;
+//
+//     if (width % 2 == 0) {
+//         cout << "Please enter an odd number for width." << endl;
+//         return 1;
+//     }
+//
+//     int mid = width / 2;
+//
+//     // Vi skriver ut övre halvan med mitten
+//     for (int i = 0; i <= mid; ++i) {
+//         for (int j = 0; j < mid - i; ++j)
+//             cout << " ";
+//         for (int j = 0; j < 2 * i + 1; ++j)
+//             cout << "*";
+//         cout << endl;
+//     }
+//
+//     // Nedre halvan
+//     for (int i = mid - 1; i >= 0; --i) {
+//         for (int j = 0; j < mid - i; ++j)
+//             cout << " ";
+//         for (int j = 0; j < 2 * i + 1; ++j)
+//             cout << "*";
+//         cout << endl;
+//     }
+//
+//     return 0;
+// }
+// _________________________
 
-    cout << "Enter the width of the diamond: ";
-    cin >> width;
 
-    if (width % 2 == 0) {
-        cout << "Please enter an odd number for width." << endl;
-        return 1;
+bool isValidCardNumber(const string & cardNumber) { //Luhns algoritm
+    int sum = 0;
+    bool doubleDigit = false;
+
+    // Går genom cifferna från höger till vänster
+    for (int i = cardNumber.length() - 1; i >= 0; --i) {
+        int digit = cardNumber[i] - '0';
+
+        if (doubleDigit) {
+            digit *= 2;
+            if (digit > 9) {
+                digit -= 9;
+            }
+        }
+
+        sum += digit;
+        doubleDigit = !doubleDigit;
     }
 
-    int mid = width / 2;
+    // %10
+    return (sum % 10 == 0);
+}
 
-    // Vi skriver ut övre halvan med mitten
-    for (int i = 0; i <= mid; ++i) {
-        for (int j = 0; j < mid - i; ++j)
-            cout << " ";
-        for (int j = 0; j < 2 * i + 1; ++j)
-            cout << "*";
-        cout << endl;
-    }
+int main() { //kort nummer 4165989206106061
+    string cardNumber;
 
-    // Nedre halvan
-    for (int i = mid - 1; i >= 0; --i) {
-        for (int j = 0; j < mid - i; ++j)
-            cout << " ";
-        for (int j = 0; j < 2 * i + 1; ++j)
-            cout << "*";
-        cout << endl;
+    cout << "Enter the card number: ";
+    cin >> cardNumber;
+
+    if (isValidCardNumber(cardNumber)) {
+        cout << "The card number is valid." << endl;
+    } else {
+        cout << "The card number is invalid." << endl;
     }
 
     return 0;
