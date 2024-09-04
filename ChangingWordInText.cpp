@@ -17,6 +17,24 @@ void findAndReplace(string& word, const string& toSearch, const string& toReplac
     }
 }
 
+int countWords(const string& text) {
+    int wordCount = 0;
+    bool inWord = false;
+
+    for (char ch : text) {
+        if (isalnum(ch)) {
+            if (!inWord) {
+                inWord = true;
+                wordCount++;
+            }
+        } else {
+            inWord = false;
+        }
+    }
+
+    return wordCount;
+}
+
 int main() {
     ifstream inputFile;
     inputFile.open("/Users/olegmakeienko/CLionProjects/test/input.txt");
@@ -45,6 +63,25 @@ int main() {
     findAndReplace(word, toSearch, toReplace);
 
     cout << "Modified text:\n" << word << endl;
+
+
+    // for(inputFile >> word; !inputFile.eof(); inputFile >> word ) {
+    //     cout << word << endl;
+    // }
+
+    int wordCount = countWords(word);
+    cout << "Word count: " << wordCount << endl;
+
+    ofstream outputFile("/Users/olegmakeienko/CLionProjects/test/newText.txt");
+    if (!outputFile) {
+        cout << "Error opening file for writing!" << endl;
+        return 1;
+    }
+
+    outputFile << word;
+    outputFile.close();
+
+    cout << "Changes saved to the file." << endl;
 
     return 0;
 }
