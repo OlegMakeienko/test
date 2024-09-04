@@ -142,18 +142,49 @@ bool isValidCardNumber(const string & cardNumber) { //Luhns algoritm
     return (sum % 10 == 0);
 }
 
-int main() { //kort nummer 4165989206106061
-    string cardNumber;
+// int main() { //kort nummer 4165989206106061
+//     string cardNumber;
+//
+//     cout << "Enter the card number: ";
+//     cin >> cardNumber;
+//
+//     if (isValidCardNumber(cardNumber)) {
+//         cout << "The card number is valid." << endl;
+//     } else {
+//         cout << "The card number is invalid." << endl;
+//     }
+//
+//     return 0;
+// }
 
-    cout << "Enter the card number: ";
-    cin >> cardNumber;
+int* findMaxInArr(int* arr, int size) {
+    int* maxPtr = arr;
 
-    if (isValidCardNumber(cardNumber)) {
-        cout << "The card number is valid." << endl;
-    } else {
-        cout << "The card number is invalid." << endl;
+    for (int* ptr = arr + 1; ptr < arr + size; ++ptr) {
+        if (*ptr > *maxPtr) {
+            maxPtr = ptr;
+        }
     }
 
-    return 0;
+    /*
+    int* findMaxInArr(int arr[], int size) {
+    int* maxPtr = &arr[0]; // Initialisera pekaren till den första elementet
+
+    for (int i = 1; i < size; ++i) {
+        if (arr[i] > *maxPtr) {
+            maxPtr = &arr[i]; // Uppdatera pekaren om vi hittar ett större värde
+        }
+    }
+     */
+
+    return maxPtr;
 }
 
+// int main() {
+//     int numbers[] = {10, 20, 3, 40, 5, 6, 70, 8, 9, 10};
+//     int size = sizeof(numbers) / sizeof(numbers[0]);
+//     int* maxNumber = findMaxInArr(numbers, size);
+//     cout << "The largest number in the array is: " << *maxNumber << endl;
+//
+//     return 0;
+// }
